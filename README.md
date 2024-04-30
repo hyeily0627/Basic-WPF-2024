@@ -11,7 +11,7 @@
         - 이전 Winforms는 이미지가 비트맵 방식
         - WPF는 이미지가 벡터 방식 
         - XAML(eXtensible Application Markup Language)을 사용한 화면 디자인 
-        -
+        
     - XAML(엑스에이엠엘, 재믈로 읽음)
         - 여는 태그<Wimdow>, 닫는 태그</Window> 
         - 합치면 <Window /> : Windowm 태그 안에 다른 객체가 없다는 뜻
@@ -36,7 +36,10 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        - ColumnSpan : 열 넘어서까지 사용 하고자 하면 사용 
+        ![비율](https://github.com/hyeily0627/Basic-WPF-2024/assets/156732476/27cb96bc-f217-4ce0-b0dd-a65890d3edb7)
+ 
+        100단위 넘어가면 사이즈이고, 그 값을 제외한 비율로 설정 
+        - ColumnSpan : 열 넘어서까지(옆 열까지 전부) 사용 하고자 하면 사용 
         
     - 디자인 코딩방법
         - 레이아웃
