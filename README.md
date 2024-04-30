@@ -21,8 +21,9 @@
             - 해제 ctrl + k + u
 
     - WPF 기본 사용법
-        - 윈폼과는 다르게 코딩으로 디자인! 
+        - 윈폼과는 다르게 코딩으로 디자인
         - 이름 설정 : x:Name="" 
+        - 바깥 라인에 마우스 올렸을때 마우스 모양 흰색과 + 모양이 있는 마우스로 바뀐 후 클릭시 그리드 행 추가 됨.
         - 배율 설정(*) 
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -35,6 +36,7 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
+        - ColumnSpan : 열 넘어서까지 사용 하고자 하면 사용 
         
     - 디자인 코딩방법
         - 레이아웃
@@ -50,9 +52,25 @@
                 Margin="10, 20, 30, 40" : 왼 10, 위 20, 오 30, 아래 40 
     - 디자인, C# 코드 완전분리 개발 -> MVVM 디자인 패턴
 
-## 2일차 
+#region
+#endregion
+
+## 2일차 (2024-04-30)  
+(Iot System Developer 02 INTERMEDIATE 02. WPF AB.WPF기본 51P 
+https://youneedawiki.com/app/page/1LPc20daicuGYTji9Me9M15JJnA8qvgeg)
+- WPF 기본 학습 
+    - 어떠한 이벤트 없이 데이터를 전달하여 사용하는 것  : 데이터 바인딩 
+    - 데이터 소스(DB, 엑셀, txt, 클라우드에 보관된 데이터 원본)에 데이터를 쉽게 가져다 쓰기위해 사용
+        - Xaml 사용 문법 : {Binding Path=속성, ElementName:객체, Mode=(oneWay|TwoWay), StringFormat={}{0:#.#}}
+        - DataContext : 데이터를 담아서 전달하는 이름
+        - 전통적인 윈폼 코드 비하인드에서 데이터를 처리하는 것을 '지양'하기 위해 사용 : 디자인과 개발을 분리! 
 
 ## 3일차 
+- WPF 기본 학습 
+    - 데이터 바인딩 마무리 
+    - 디자인 리소스
+- WPF MVVM 
+
 
 ## 4일차 
 
