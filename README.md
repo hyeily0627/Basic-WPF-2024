@@ -95,7 +95,7 @@ https://youneedawiki.com/app/page/1LPc20daicuGYTji9Me9M15JJnA8qvgeg)
         - View : 화면, 순수 xmal로만 구성 
         - ViewModel : 뷰에 대한 메서드, 액션, INotifyPropertyChanged를 구현 
 
-    ![Mvvm패턴]()
+    ![Mvvm패턴](https://raw.githubusercontent.com/hyeily0627/Basic-WPF-2024/main/images/wpf001.png)
 
     - 권장 구현방법
         - ViewModel 생성, 알림 속성 구현
@@ -103,7 +103,7 @@ https://youneedawiki.com/app/page/1LPc20daicuGYTji9Me9M15JJnA8qvgeg)
         - Model DB작업 독립적으로 구현
         
     - MVVM 구현 도와주는 프레임워크
-        0. Mvvmlight.Toolkit - 3rd Party 개발. 더이상 개발이나 지원이 없음. 2009년부터 시작 2014년도 이후 더이상 개발이나 지원이 없음
+        0. ~~Mvvmlight.Toolkit~~ - 3rd Party 개발. 더이상 개발이나 지원이 없음. 2009년부터 시작 2014년도 이후 더이상 개발이나 지원이 없음
         1. **Caliburn.Micro** - 3rd Party 개발. MVVM이 아주 간단. 강력. 디버깅이 조금 어려움, 중소형 프로젝트에 적합
         2. AvaloniaUI - 3rd Party 개발. 크로스플랫폼. 디자인은 최고
         3. Prism - Microsoft 개발. 무지막지하게 어렵다. 대규모 프로젝트에 활용
@@ -144,8 +144,8 @@ https://youneedawiki.com/app/page/1LPc20daicuGYTji9Me9M15JJnA8qvgeg)
     9. Bootstrapper.cs Onstartup()에 내용을 변경 
 
     - 작업(3명 분리)
-        - DB 개발자 : DBMS 테이블 생성 
-        - xaml 디자이너 : 
+        - DB개발자 - DBMS 테이블 생성, Models에 클래스 작업
+        - Xaml디자이너 - Views 폴더에 있는 xaml 파일을 디자인작업
 
 ## 4일차 
 
