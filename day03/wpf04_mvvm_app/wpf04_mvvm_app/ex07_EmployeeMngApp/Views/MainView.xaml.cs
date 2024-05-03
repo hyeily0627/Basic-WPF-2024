@@ -16,6 +16,7 @@ namespace ex07_EmployeeMngApp.Views
 {
     /// <summary>
     /// MainView.xaml에 대한 상호 작용 논리
+    /// 🚨여기는 프로그래밍 코딩안함🚨 (진짜 큰 문제 아니고서는?)
     /// </summary>
     public partial class MainView : Window
     {

@@ -142,12 +142,29 @@ https://youneedawiki.com/app/page/1LPc20daicuGYTji9Me9M15JJnA8qvgeg)
     7. App.xaml.cs에 App() 생성자 추가 
     8. viewModels 폴더에 MainViewModel 클래스 생성 
     9. Bootstrapper.cs Onstartup()에 내용을 변경 
+    10. Views 폴더에 MainView.xaml 생성
 
     - 작업(3명 분리)
         - DB개발자 - DBMS 테이블 생성, Models에 클래스 작업
         - Xaml디자이너 - Views 폴더에 있는 xaml 파일을 디자인작업
 
-## 4일차 
+## 4일차 (2024-05-03)
+- Caliburn.Micro   
+    - 작업분리 
+        - Xaml디자이너 :  Xaml 파일만 디자인 
+        - ViewModel개발자 : Model에 있는 DB관련 정보와 View와 연계 전체구현 작업 
+
+        - Microsoft.Data.SqlClient 다운 (Nuget)
+
+    - Caliburn.Micro 특징
+        - Xaml 디자인시 {Binding...}은 잘 사용하지 않음
+        - 대신 x : Name을 사용 
+        ![xname](https://raw.githubusercontent.com/hyeily0627/Basic-WPF-2024/main/images/a.png)
+
+    - MVVM 특징 
+        - 예외발생시 예외메시지 표시 없이 프로그램 종료 
+        - **F5를 눌러 디버깅**하여 오류 확인! 
+        - ViewModel에서 디버깅 시작 
 
 ## 5일차 
 
