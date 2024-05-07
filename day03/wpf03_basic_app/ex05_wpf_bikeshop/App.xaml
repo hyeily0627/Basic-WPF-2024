@@ -4,14 +4,10 @@
              xmlns:local="clr-namespace:ex05_wpf_bikeshop"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        
-        <!--<Button x:Key="custButton">Hello, Button</Button>
-        <SolidColorBrush x:Key="accrntbrush" Color="Beige"/>-->
-
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="CustomDictionary.xaml"/>
+                <ResourceDictionary Source="CustomDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>    
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

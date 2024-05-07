@@ -7,12 +7,12 @@ namespace ex05_wpf_bikeshop
         // 우리가 만드는 클래스의 속성값이 변경되는 것을 알려주는 이벤트핸들러
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        // 프로퍼티가 변경되어 있어요!
-        protected void OnpropertyChange(String propertyName)
+        // 프로퍼티가 변경되어었어요!!!
+        protected void OnPropertyChanged(string propertyName)
         {
-           if (PropertyChanged != null)
+            if (PropertyChanged != null)
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));  
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
     }
