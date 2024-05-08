@@ -8,6 +8,10 @@ using System.Text;
 using System.Diagnostics;
 using System.Net;
 using System.IO;
+using Newtonsoft.Json.Linq;
+using ex10_MovieFinder2024.Models;
+using System.Windows.Media.Imaging;
+using System.Security.AccessControl;
 
 namespace ex10_MovieFinder2024
 {
@@ -21,6 +25,7 @@ namespace ex10_MovieFinder2024
             InitializeComponent();
         }
 
+        #region 검색창 내용 입력 후 엔터키 사용시 클릭이벤트 실행 
         private async void BtnSearch_Click(object sender, RoutedEventArgs e)
         {
             //await this.ShowMessageAsync("검색", "검색을 시작합니다!!");
@@ -32,6 +37,7 @@ namespace ex10_MovieFinder2024
 
             SearchMovie(TxtMovieName.Text);
         }
+        #endregion
 
         private async void SearchMovie(string movieName)
         {
@@ -68,16 +74,76 @@ namespace ex10_MovieFinder2024
                 reader.Close();
                 res.Close();
             }
+
+            // result string을 Json으로 변경! 
+            var jsonResult = JObject.Parse(result); // type.parse()는 ()안의 것으로 바꾸는 것 
+            var total = Int32.Parse(jsonResult["total_results"].ToString());
+            //await this.ShowMessageAsync("검색수",total.ToString());
+
+            var results = jsonResult["results"];
+            var jsonArray = results as JArray; // results가 Json 배열이기때문에 JArrays는 List와 동일 -> 따라서 foreach 사용가능 
+
+            var movieItems = new List<MovieItem>();
+            foreach(var item in jsonArray)
+            {
+                var movieItem = new MovieItem()
+                {
+                    // 프로퍼티라서 대문자로 시작, json 자체키가 adult 
+                    // Convert.ToBoolean(object) == Boolean.Parse(string)
+                    //  Convert.ToDouble() == Double.Parse(string) 
+                    Adult = Boolean.Parse(item["adult"].ToString()),
+                    Id = Int32.Parse(item["id"].ToString()),
+                    Original_Language = item["original_language"].ToString(),
+                    Original_Title = item["original_title"].ToString(),
+                    Overview = item["overview"].ToString(),
+                    Popularity = Double.Parse(item["popularity"].ToString()),
+                    Poster_Path = item["poster_path"].ToString(),
+                    Release_Date = item["release_date"].ToString(),
+                    Title = item["title"].ToString(),
+                    Vote_Average = Double.Parse(item["vote_average"].ToString()),
+                    Vote_Count = Int32.Parse(item["vote_count"].ToString())
+                };
+                movieItems.Add(movieItem);
+            }
+            this.DataContext = movieItems;  
         }
 
         private void TxtMovieName_KeyDown(object sender, KeyEventArgs e)
         {
-            
+            if (e.Key == Key.Enter) 
+            {
+                BtnSearch_Click(sender, e); 
+            }
+
         }
 
-        private async void GrdResult_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+
+        private void GrdResult_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
-            await this.ShowMessageAsync("포스터", "포스터처리합니다");
+            // 재검색하면 데이터 그리드 결과가 바뀌면서 이 이벤트가 다시 발생(예외처리) 
+            try
+            {
+                var movie = GrdResult.SelectedItem as MovieItem;
+                var poster_path = movie.Poster_Path;
+
+                //await this.ShowMessageAsync("포스터", Poster_Path);
+                if (string.IsNullOrEmpty(poster_path)) 
+                {
+                    ImgPoster.Source = new BitmapImage(new Uri("/No_Picture.png", UriKind.RelativeOrAbsolute));
+                }
+                else
+                {
+                    var base_url = "https://image.tmdb.org/t/p/w300_and_h450_bestv2";
+                    ImgPoster.Source = new BitmapImage(new Uri($"{base_url}{poster_path}", UriKind.Absolute));
+                }
+
+            }
+            catch (Exception ex)  
+            {
+                Debug.WriteLine($"{ex.Message}");    
+            }
+
+
         }
 
         private async void BtnAddFavorite_Click(object sender, RoutedEventArgs e)
@@ -97,7 +163,22 @@ namespace ex10_MovieFinder2024
 
         private async void BtnWatchTrailer_Click(object sender, RoutedEventArgs e)
         {
-            await this.ShowMessageAsync("유튜브예고편", "예고편 확인합니다");
+            //await this.ShowMessageAsync("유튜브 예고편", "예고편 확인합니다");
+            if(GrdResult.SelectedItems.Count == 0)
+            { 
+                await this.ShowMessageAsync("예고편 보기", "영화를 선택하세요");
+                return; 
+            }
+
+            if (GrdResult.SelectedItems.Count > 1)
+            {
+                await this.ShowMessageAsync("예고편 보기", "영화를 하나만 선택하세요");
+                return;
+            }
+            var TrailerWindow = new TrailerWindow();
+            TrailerWindow.Owner = this;
+            TrailerWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            TrailerWindow.ShowDialog();
         }
     }
 }

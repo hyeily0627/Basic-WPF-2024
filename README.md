@@ -55,9 +55,6 @@
                 Margin="10, 20, 30, 40" : 왼 10, 위 20, 오 30, 아래 40 
     - 디자인, C# 코드 완전분리 개발 -> MVVM 디자인 패턴
 
-#region
-#endregion
-
 ## 2일차 (2024-04-30)  
 (Iot System Developer 02 INTERMEDIATE 02. WPF AB.WPF기본 51P 
 https://youneedawiki.com/app/page/1LPc20daicuGYTji9Me9M15JJnA8qvgeg)
@@ -165,6 +162,15 @@ https://youneedawiki.com/app/page/1LPc20daicuGYTji9Me9M15JJnA8qvgeg)
         - 예외발생시 예외메시지 표시 없이 프로그램 종료 
         - **F5를 눌러 디버깅**하여 오류 확인! 
         - ViewModel에서 디버깅 시작 
+        - View.xaml 바인딩, 버튼클릭 이름(ViewModel 속성, 메서드) 지정 주의
+        - Model내 속성 DB 테이블 컬럼 이름 일치, CRUD 쿼리문 오타 주의
+        - ViewModel 부분
+            - 변수, 속성으로 분리
+            - 속성이 Model내의 속성과 이름이 일치
+            - List 사용불가 -> BindableCollection으로 변경
+            - 메서드와 이름이 동일한 Can... 프로퍼티 지정, 버튼 활성/비활성화
+            - 모든 속성에 NotifyOfPropertyChange() 메서드 존재!!(값 변경 알림)
+    ![실행화면](https://raw.githubusercontent.com/hyeily0627/basic-wpf-2024/main/images/wpf002.png)
 
 ## 5일차 
 - MahApps.Metro (https://mahapps.com/)
@@ -192,6 +198,10 @@ https://youneedawiki.com/app/page/1LPc20daicuGYTji9Me9M15JJnA8qvgeg)
             3. 범위는 저장 후 계속
             4. OAuth Client ID, 앱유형을 데스크톱앱, 이름 입력 후 만들기 클릭
 ## 6일차 
+
+
+#region
+#endregion
 
 ## 7일차 
 
