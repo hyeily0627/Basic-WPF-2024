@@ -197,6 +197,7 @@ https://youneedawiki.com/app/page/1LPc20daicuGYTji9Me9M15JJnA8qvgeg)
             2. OAuth  동의화면, 기본내용 입력 후 다음
             3. 범위는 저장 후 계속
             4. OAuth Client ID, 앱유형을 데스크톱앱, 이름 입력 후 만들기 클릭
+
 ## 6일차 
 - MovieFinder 2024 남은것
     - 즐겨찾기 후 다시 선택 즐겨찾기 막아야함
@@ -209,7 +210,7 @@ https://youneedawiki.com/app/page/1LPc20daicuGYTji9Me9M15JJnA8qvgeg)
 ## 7일차 
 - MovieFinder 2024 완료
 
-    
+https://github.com/hyeily0627/Basic-WPF-2024/assets/156732476/443642d4-5b37-4333-aa76-c1e96bd792c7
 
 - 데이터포털 API 연동앱 예제
     - CefSharp 사용시 플랫폼 대상 AnyCPU에서 x64로 변경필수!
@@ -218,6 +219,3 @@ https://youneedawiki.com/app/page/1LPc20daicuGYTji9Me9M15JJnA8qvgeg)
 
 ## 8일차
 - WPF 개인프로젝트 포트폴리오 작업
-## 8일차 
-
-## 9일차 
