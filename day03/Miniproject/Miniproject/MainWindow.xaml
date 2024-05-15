@@ -8,50 +8,94 @@
     xmlns:iconPack="http://metro.mahapps.com/winfx/xaml/iconpacks"
     xmlns:local="clr-namespace:Miniproject"
     mc:Ignorable="d"
-    Title="MainWindow" Height="450" Width="800">
+    Title="" Height="450" Width="800">
+    <mah:MetroWindow.IconTemplate>
+        <DataTemplate>
+            <iconPack:PackIconFontAwesome Kind="MapMarkedAltSolid" Margin="10,7,0,0" Foreground="White" />
+        </DataTemplate>
+    </mah:MetroWindow.IconTemplate>
+
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="93*" />
+            <ColumnDefinition Width="440*"/>
+            <ColumnDefinition Width="267*" />
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="60" />
             <RowDefinition Height="1*" />
-            <RowDefinition Height="30" />
-        </Grid.RowDefinitions>
+            <RowDefinition Height="20" />
 
-        <!-- 최상단 타이틀 및 버튼위치 -->
-        <Grid Grid.Row="0">
+        </Grid.RowDefinitions>
+        <!-- 바깥쪽 그리드 영역설정 끝-->
+
+        <!-- 맨위쪽 검색 영역 -->
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
                 <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
 
-            <Label Content="김해시 실시간 미세먼지 측정앱" FontSize="16" FontWeight="Bold" Margin="10" />
+            <TextBox x:Name="TxtAttactionName" Grid.Row="0" Grid.Column="0" 
+                     Margin="5,10" FontSize="14"
+                     mah:TextBoxHelper.Watermark="검색할 부산지역의 여행지 입력"
+                     mah:TextBoxHelper.UseFloatingWatermark="True"
+                     mah:TextBoxHelper.ClearTextButton="True" 
+                     KeyDown="TxtAttactionName_KeyDown"/>
+            <Button x:Name="BtnSearch" Grid.Row="0" Grid.Column="1" Margin="5,10" 
+                    FontSize="14" Content="검색"
+                    Style="{StaticResource MahApps.Styles.Button.Square.Accent}"
+                    Click="BtnSearch_Click"
+                    Background="DarkGreen">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
 
-            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button x:Name="BtnReqRealtime" Content="실시간조회" Width="100" Margin="5,10" 
-                Style="{StaticResource MahApps.Styles.Button.Square.Accent}"
-                Click="BtnReqRealtime_Click"/>
-                <Button x:Name="BtnSaveData" Content="저장" Width="80" Margin="5,10"
-                Style="{StaticResource MahApps.Styles.Button.Square.Highlight}"
-                Click="BtnSaveData_Click" />
-                <ComboBox x:Name="CboReqDate" Width="150" Margin="5,10,10,10"
-                  Style="{StaticResource MahApps.Styles.ComboBox}"
-                  mah:TextBoxHelper.Watermark="검색날짜 선택"
-                  mah:TextBoxHelper.UseFloatingWatermark="True"
-                  mah:TextBoxHelper.ClearTextButton="True"
-                  SelectionChanged="CboReqDate_SelectionChanged" />
-            </StackPanel>
+                            <TextBlock Text="{Binding}" Margin="5" />
+                        </StackPanel>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
         </Grid>
 
-        <!-- 중간 데이터그리드영역-->
-        <DataGrid x:Name="GrdResult" Grid.Row="1" Margin="10"
-          IsReadOnly="True" ItemsSource="{Binding}"
-          Style="{StaticResource MahApps.Styles.DataGrid.Azure}" 
-          MouseDoubleClick="GrdResult_MouseDoubleClick" />
+        <!-- 검색결과 영역 -->
+        <DataGrid x:Name="GrdResult" Grid.Row="1" Grid.Column="0" Margin="5,5,5,5"
+                  IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding}" 
+                  Style="{StaticResource MahApps.Styles.DataGrid.Azure}"
+                  
+                  
+                  Grid.ColumnSpan="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding MAIN_TITLE}" Header="콘텐츠명" FontWeight="Bold" />
+                <DataGridTextColumn Binding="{Binding GUGUN_NM}" Header="구/군" />
+                <DataGridTextColumn Binding="{Binding TITLE}" Header="제목" />
+                <DataGridTextColumn Binding="{Binding SUBTITLE}" Header="부제목" />
+                <DataGridTextColumn Binding="{Binding ADDR1	}" Header="주소" />
+                <DataGridTextColumn Binding="{Binding CNTCT_TEL}" Header="연락처" />
+                <DataGridTextColumn Binding="{Binding HOMEPAGE_URL}" Header="홈페이지" />
+                <DataGridTextColumn Binding="{Binding TRFC_INFO}" Header="교통정보" />
+                <DataGridTextColumn Binding="{Binding USAGE_AMOUNT}" Header="이용요금" />
+                <DataGridTextColumn Binding="{Binding MIDDLE_SIZE_RM1}" Header="편의시설" />
+                <DataGridTextColumn Binding="{Binding ITEMCNTNTS}" Header="상세정보" />
+            </DataGrid.Columns>
+        </DataGrid>
 
+        <!-- 포스터 영역 -->
+        <Grid Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="440,0,0,0">
+            <GroupBox Header="포스터" Margin="10"
+                      mah:HeaderedControlHelper.HeaderFontSize="14"
+                      mah:HeaderedControlHelper.HeaderFontWeight="Bold"
+                      mah:HeaderedControlHelper.HeaderHorizontalContentAlignment="Center">
+                <Image x:Name="ImgPoster" Source="No_Picture.png" Margin="15,5" />
+            </GroupBox>
+        </Grid>
+        
         <!-- 맨하단 상태바 위치 -->
-        <StatusBar Grid.Row="2">
-            <StatusBarItem Content="김해시 미세먼지앱" />
+        <StatusBar Grid.Row="2" Grid.ColumnSpan="3">
+            <StatusBarItem Content="부산광역시_부산명소정보 서비스" />
             <Separator Style="{StaticResource MahApps.Styles.Separator.StatusBar}" />
             <StatusBarItem x:Name="StsResult" />
         </StatusBar>
+
     </Grid>
 </mah:MetroWindow>

@@ -17,6 +17,7 @@ using System.Net;
 using System.IO;
 using System.Diagnostics;
 using Miniproject.Models;
+using ControlzEx.Standard;
 
 namespace Miniproject
 {
@@ -30,7 +31,7 @@ namespace Miniproject
             InitializeComponent();
         }
 
-        private async void BtnReqRealtime_Click(object sender, RoutedEventArgs e)
+        private async void BtnSearch_Click(object sender, RoutedEventArgs e)
         {
             string openApiUri = "https://apis.data.go.kr/6260000/AttractionService/getAttractionKr?serviceKey=ZWzY%2BaXaAxa6uaINctI3EjRA4kcyYOoPzwebpFlGhuvk3PQCHkyn6CLNtMHN7NyVoMUFEVub1%2BCzXExqMR3YoQ%3D%3D&pageNo=1&numOfRows=10&resultType=json";
             string result = string.Empty;
@@ -68,33 +69,33 @@ namespace Miniproject
                 {
                     attraction.Add(new Attraction()
                     {
-                        Id = 0,
-                        MAIN_TITLE = Convert.ToString(item["dev_id"]),
-                        GUGUN_NM = Convert.ToString(item["name"]),
-                        LAT = Convert.ToDouble(item["loc"]),
-                        LNG = Convert.ToDouble(item["company_id"]),
-                        PLACE = Convert.ToString(item["company_name"]),
-                        TITLE = Convert.ToString(item["coordx"]),
-                        SUBTITLE = Convert.ToString(item["coordy"]),
-                        ADDR1 = Convert.ToString(item["pm10_after"]),
-                        CNTCT_TEL = Convert.ToInt32(item["pm25_after"]),
-                        HOMEPAGE_URL = Convert.ToString(item["state"]),
-                        TRFC_INFO = Convert.ToString(item["ison"]),
+                        
+                        MAIN_TITLE = Convert.ToString(item["main_title"]),
+                        GUGUN_NM = Convert.ToString(item["gugun_nm"]),
+                        LAT = Convert.ToDouble(item["lat"]),
+                        LNG = Convert.ToDouble(item["lng"]),
+                        PLACE = Convert.ToString(item["place"]),
+                        TITLE = Convert.ToString(item["title"]),
+                        SUBTITLE = Convert.ToString(item["subtitle"]),
+                        ADDR1 = Convert.ToString(item["addr1"]),
+                        CNTCT_TEL = Convert.ToString(item["cntct_tel"]),
+                        HOMEPAGE_URL = Convert.ToString(item["homepage_url"]),
+                        TRFC_INFO = Convert.ToString(item["trfc_info"]),
+                        USAGE_AMOUNT = Convert.ToString(item["usage_amount"]),
+                        MIDDLE_SIZE_RM1 = Convert.ToString(item["middle_size_rm1"]),
+                        ITEMCNTNTS = Convert.ToString(item["itemcntnts"]),
                     });
                 }
+                this.DataContext = attraction;
+                StsResult.Content = $"OpenAPI {attraction.Count}건 조회완료!";
             }
-
-
         }
-
-        private void BtnSaveData_Click(object sender, RoutedEventArgs e)
+        private void TxtAttactionName_KeyDown(object sender, KeyEventArgs e)
         {
-
-        }
-
-        private void CboReqDate_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
+            if (e.Key == Key.Enter)
+            {
+                BtnSearch_Click(sender, e); // 검색 버튼클릭 이벤트핸들러 실행
+            }
         }
     }
 }
