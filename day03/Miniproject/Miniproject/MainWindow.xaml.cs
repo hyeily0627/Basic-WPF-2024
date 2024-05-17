@@ -33,64 +33,16 @@ namespace Miniproject
 
         private async void BtnSearch_Click(object sender, RoutedEventArgs e)
         {
-            string openApiUri = "https://apis.data.go.kr/6260000/AttractionService/getAttractionKr?serviceKey=ZWzY%2BaXaAxa6uaINctI3EjRA4kcyYOoPzwebpFlGhuvk3PQCHkyn6CLNtMHN7NyVoMUFEVub1%2BCzXExqMR3YoQ%3D%3D&pageNo=1&numOfRows=10&resultType=json";
-            string result = string.Empty;
-
-            WebRequest req = null;  
-            WebResponse res = null; 
-            StreamReader reader = null;
-
-            try
+            if (string.IsNullOrEmpty(TxtAttractionName.Text))
             {
-                req = WebRequest.Create(openApiUri);
-                res = await req.GetResponseAsync();
-                reader = new StreamReader(res.GetResponseStream());
-                result = reader.ReadToEnd();
-
-                //await this.ShowMessageAsync("결과", result);
-                Debug.WriteLine(result);
+                await this.ShowMessageAsync("검색", "검색할 영화명을 입력하세요!!");
+                return;
             }
-            catch (Exception ex)
-            {
-                await this.ShowMessageAsync("오류", $"OpenAPI 조회오류 {ex.Message}");
-            }
-
-            var jsonResult = JObject.Parse(result);
-            var header = jsonResult["getAttractionKr"]["header"];
-            var code = Convert.ToInt32(header["code"]);
-
-            if (code == 00)
-            {
-                var data = jsonResult["getAttractionKr"]["item"];
-                var jsonArray = data as JArray; // json자체에서 []안에 들어간 배열데이터만 JArray 변환가능
-
-                var attraction = new List<Attraction>();
-                foreach (var item in jsonArray)
-                {
-                    attraction.Add(new Attraction()
-                    {
-                        
-                        MAIN_TITLE = Convert.ToString(item["main_title"]),
-                        GUGUN_NM = Convert.ToString(item["gugun_nm"]),
-                        LAT = Convert.ToDouble(item["lat"]),
-                        LNG = Convert.ToDouble(item["lng"]),
-                        PLACE = Convert.ToString(item["place"]),
-                        TITLE = Convert.ToString(item["title"]),
-                        SUBTITLE = Convert.ToString(item["subtitle"]),
-                        ADDR1 = Convert.ToString(item["addr1"]),
-                        CNTCT_TEL = Convert.ToString(item["cntct_tel"]),
-                        HOMEPAGE_URL = Convert.ToString(item["homepage_url"]),
-                        TRFC_INFO = Convert.ToString(item["trfc_info"]),
-                        USAGE_AMOUNT = Convert.ToString(item["usage_amount"]),
-                        MIDDLE_SIZE_RM1 = Convert.ToString(item["middle_size_rm1"]),
-                        ITEMCNTNTS = Convert.ToString(item["itemcntnts"]),
-                    });
-                }
-                this.DataContext = attraction;
-                StsResult.Content = $"OpenAPI {attraction.Count}건 조회완료!";
-            }
+            var mapwindow = new Window1();
+            mapwindow.ShowDialog();
         }
-        private void TxtAttactionName_KeyDown(object sender, KeyEventArgs e)
+
+        private void TxtAttractionName_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
