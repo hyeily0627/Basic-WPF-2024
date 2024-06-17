@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace SmartBox
 {
     /// <summary>
-    /// Menu.xaml에 대한 상호 작용 논리
+    /// code.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class Menu : Window
+    public partial class Code : Window
     {
-        public Menu()
+        public Code()
         {
             InitializeComponent();
         }

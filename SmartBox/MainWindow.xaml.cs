@@ -20,5 +20,29 @@ namespace SmartBox
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string phoneNumber = PhoneNumberTextBox.Text;
+
+            // 핸드폰 번호 유효성 검사 (010-xxxx-xxxx)
+            if (!IsPhoneNumberValid(phoneNumber))
+            {
+                MessageBox.Show("올바른 핸드폰 번호 형식이 아닙니다.", "경고", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+            {
+                // 유효한 경우에 수행할 작업 추가
+                Menu menu = new Menu();
+                menu.ShowDialog();
+            }
+
+        }
+        private bool IsPhoneNumberValid(string phoneNumber)
+        {
+            // 간단한 유효성 검사를 위해 길이와 형식을 체크합니다.
+            return System.Text.RegularExpressions.Regex.IsMatch(phoneNumber, @"^01[0-9]-\d{3,4}-\d{4}$");
+        }
+
     }
 }
